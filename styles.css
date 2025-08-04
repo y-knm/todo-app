@@ -216,3 +216,44 @@ body {
   font-weight: bold;
   color: #667eea;
 }
+.actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.action-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#clearCompleted {
+  background: #ffc107;
+}
+
+#clearCompleted:hover {
+  background: #e0a800;
+}
+
+#clearAll {
+  background: #dc3545;
+}
+
+#clearAll:hover {
+  background: #c82333;
+}
