@@ -43,3 +43,46 @@ body {
   opacity: 0.9;
   font-weight: 300;
 }
+.todo-container {
+  padding: 30px;
+}
+
+.input-section {
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#todoInput {
+  flex: 1;
+  padding: 15px 25px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #f8f9fa;
+}
+
+#todoInput:focus {
+  background: white;
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
