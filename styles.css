@@ -282,3 +282,63 @@ body {
 .todo-item.removing {
   animation: fadeOut 0.3s ease forwards;
 }
+@media (max-width: 768px) {
+  .container {
+    margin: 10px;
+    border-radius: 15px;
+  }
+
+  .header {
+    padding: 30px 20px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .todo-container {
+    padding: 20px;
+  }
+
+  .todo-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .filter-section {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+    border-radius: 15px;
+  }
+
+  .add-btn {
+    border-radius: 0 0 15px 15px;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .todo-actions {
+    align-self: flex-end;
+  }
+}
