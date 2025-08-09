@@ -24,13 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
   todoInput.addEventListener("keypress", (e) => {
     // 入力欄でEnterキーが押されたらaddTodoメソッドを呼び出す
     if (e.key === "Enter") addTodo();
+  });
 
-    filterBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        setFilter(e.target.dataset.filter);
-      });
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      setFilter(e.target.dataset.filter);
     });
   });
+
+  clearCompletedBtn.addEventListener("click", clearCompleted);
+  clearAllBtn.addEventListener("click", clearAll);
 
   // localStorageからタスクデータを読み込んで描画
   todos = loadTodos();
@@ -172,5 +175,27 @@ function getFilteredTodos() {
       return todos.filter((t) => t.completed);
     default: // "all" の場合
       return todos;
+  }
+}
+
+//以下の文章は要れる場所違うかもしれない．違ったら直す
+
+// 完了済み削除
+function clearCompleted() {
+  if (confirm("完了済みのタスクをすべて削除しますか？")) {
+    todos = todos.filter((t) => !t.completed); // 未完了のタスクだけを残す
+    saveTodos();
+    renderTodos();
+    updateStats();
+  }
+}
+
+// 全削除
+function clearAll() {
+  if (confirm("すべてのタスクを削除しますか？この操作は元に戻せません。")) {
+    todos = []; // 配列を空にする
+    saveTodos();
+    renderTodos();
+    updateStats();
   }
 }
