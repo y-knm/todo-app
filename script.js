@@ -24,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
   todoInput.addEventListener("keypress", (e) => {
     // 入力欄でEnterキーが押されたらaddTodoメソッドを呼び出す
     if (e.key === "Enter") addTodo();
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        setFilter(e.target.dataset.filter);
+      });
+    });
   });
 
   // localStorageからタスクデータを読み込んで描画
@@ -57,8 +63,27 @@ function addTodo() {
 
 // タスク完了切替
 function renderTodos() {
-  // 実際のタスクを描画する処理（後で詳しく実装）
-  todoList.innerHTML = todos
+  const filteredTodos = getFilteredTodos();
+
+  if (filteredTodos.length === 0) {
+    todoList.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-clipboard-list" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+        <p style="color: #666; text-align: center;">
+          ${
+            currentFilter === "all"
+              ? "タスクがありません。新しいタスクを追加してください。"
+              : currentFilter === "active"
+              ? "未完了のタスクがありません。"
+              : "完了済みのタスクがありません。"
+          }
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  todoList.innerHTML = filteredTodos
     .map(
       (todo) => `
         <div class="todo-item ${
@@ -124,4 +149,28 @@ function updateStats() {
   totalTasksEl.textContent = total;
   completedTasksEl.textContent = completed;
   activeTasksEl.textContent = active;
+}
+
+// フィルタ切替
+function setFilter(filter) {
+  currentFilter = filter; // 現在のフィルター状態を更新
+
+  // ボタンのアクティブ状態を更新
+  filterBtns.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.filter === filter);
+  });
+
+  renderTodos(); // フィルターを適用して再描画
+}
+
+// フィルタ適用
+function getFilteredTodos() {
+  switch (currentFilter) {
+    case "active":
+      return todos.filter((t) => !t.completed);
+    case "completed":
+      return todos.filter((t) => t.completed);
+    default: // "all" の場合
+      return todos;
+  }
 }
